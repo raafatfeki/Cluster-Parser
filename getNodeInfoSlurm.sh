@@ -147,8 +147,10 @@ else
 fi
 
 echo "Collect Nodes Info"
+mkdir -p cluster_parser/data 2> /dev/null
+
 if [[ $1 != "append" ]]; then
-	rm -rf nodesInfo.txt &> /dev/null
+	rm -rf cluster_parser/data/nodesInfo.txt &> /dev/null
 fi
-pdsh -t 2 -w ^hostfile  "$(typeset -f get_node_info ); get_node_info;" &>> "nodesInfo.txt"
+pdsh -t 2 -w ^hostfile  "$(typeset -f get_node_info ); get_node_info;" &>> "cluster_parser/data/nodesInfo.txt"
 
